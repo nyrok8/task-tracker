@@ -1,0 +1,31 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  max_connections: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+
+development:
+  <<: *default
+  database: task_tracker_development
+
+test:
+  <<: *default
+  database: task_tracker_test
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: task_tracker_production
+    username: task_tracker
+    password: <%= ENV["TASK_TRACKER_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: task_tracker_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: task_tracker_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: task_tracker_production_cable
+    migrations_paths: db/cable_migrate
