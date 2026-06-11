@@ -1,0 +1,282 @@
+# Auto-generated from request specs by rspec-openapi.
+# Do not edit by hand — regenerate with: OPENAPI=1 bundle exec rspec spec/requests
+---
+openapi: 3.0.3
+info:
+  title: Task Tracker API
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:3000
+  description: Local
+paths:
+  "/tasks/one_offs":
+    post:
+      summary: create
+      tags:
+      - OneOffs
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                one_off:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    scheduled_at:
+                      type: string
+                  required:
+                  - name
+                  - description
+                  - scheduled_at
+              required:
+              - one_off
+            example:
+              one_off:
+                name: Patient round
+                description: Morning ward round
+                scheduled_at: '2026-06-09T08:00:00'
+      responses:
+        '201':
+          description: creates the task and responds with 201
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  assignee_id:
+                    nullable: true
+                  created_at:
+                    type: string
+                  description:
+                    type: string
+                  name:
+                    type: string
+                  scheduled_at:
+                    type: string
+                  status:
+                    type: string
+                  tags:
+                    type: array
+                    items: {}
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - assignee_id
+                - created_at
+                - description
+                - name
+                - scheduled_at
+                - status
+                - tags
+                - updated_at
+              example:
+                id: 433
+                assignee_id:
+                created_at: '2026-06-11T18:54:08.984+03:00'
+                description: Morning ward round
+                name: Patient round
+                scheduled_at: '2026-06-09T08:00:00.000+03:00'
+                status: pending
+                tags: []
+                updated_at: '2026-06-11T18:54:08.984+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - name
+                required:
+                - errors
+              example:
+                errors:
+                  name:
+                  - must be filled
+  "/tasks/one_offs/{id}":
+    delete:
+      summary: destroy
+      tags:
+      - OneOffs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 434
+      responses:
+        '204':
+          description: destroys the task and responds with 204
+    get:
+      summary: show
+      tags:
+      - OneOffs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 435
+      responses:
+        '200':
+          description: responds with the task
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  assignee_id:
+                    nullable: true
+                  created_at:
+                    type: string
+                  description:
+                    type: string
+                  name:
+                    type: string
+                  scheduled_at:
+                    type: string
+                  status:
+                    type: string
+                  tags:
+                    type: array
+                    items: {}
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - assignee_id
+                - created_at
+                - description
+                - name
+                - scheduled_at
+                - status
+                - tags
+                - updated_at
+              example:
+                id: 435
+                assignee_id:
+                created_at: '2026-06-11T18:54:08.989+03:00'
+                description: Morning ward round
+                name: Patient round
+                scheduled_at: '2026-06-12T18:54:08.989+03:00'
+                status: pending
+                tags: []
+                updated_at: '2026-06-11T18:54:08.989+03:00'
+    patch:
+      summary: update
+      tags:
+      - OneOffs
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 437
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                one_off:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                  required:
+                  - status
+              required:
+              - one_off
+            example:
+              one_off:
+                status: done
+      responses:
+        '200':
+          description: updates the task
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                  id:
+                    type: integer
+                  assignee_id:
+                    nullable: true
+                  created_at:
+                    type: string
+                  description:
+                    type: string
+                  name:
+                    type: string
+                  scheduled_at:
+                    type: string
+                  tags:
+                    type: array
+                    items: {}
+                  updated_at:
+                    type: string
+                required:
+                - status
+                - id
+                - assignee_id
+                - created_at
+                - description
+                - name
+                - scheduled_at
+                - tags
+                - updated_at
+              example:
+                status: done
+                id: 436
+                assignee_id:
+                created_at: '2026-06-11T18:54:08.990+03:00'
+                description: Morning ward round
+                name: Patient round
+                scheduled_at: '2026-06-12T18:54:08.990+03:00'
+                tags: []
+                updated_at: '2026-06-11T18:54:08.991+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      status:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - status
+                required:
+                - errors
+              example:
+                errors:
+                  status:
+                  - 'must be one of: pending, done, cancelled'

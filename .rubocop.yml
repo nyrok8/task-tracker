@@ -319,6 +319,8 @@ Rails/BulkChangeTable:
   Enabled: false
 Rails/DangerousColumnNames:
   Enabled: false
+Rails/DeprecatedActiveModelErrorsMethods:
+  Enabled: false
 Rails/FilePath:
   Enabled: false
 Rails/I18nLocaleTexts:

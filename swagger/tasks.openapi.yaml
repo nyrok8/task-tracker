@@ -1,0 +1,85 @@
+# Auto-generated from request specs by rspec-openapi.
+# Do not edit by hand — regenerate with: OPENAPI=1 bundle exec rspec spec/requests
+---
+openapi: 3.0.3
+info:
+  title: Task Tracker API
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:3000
+  description: Local
+paths:
+  "/tasks":
+    get:
+      summary: index
+      tags:
+      - Tasks
+      parameters:
+      - name: from
+        in: query
+        required: false
+        schema:
+          type: string
+        example: invalid
+      - name: q[status]
+        in: query
+        required: false
+        schema:
+          type: string
+        example: done
+      - name: to
+        in: query
+        required: false
+        schema:
+          type: string
+        example: '2026-06-10T23:59:59'
+      responses:
+        '200':
+          description: responds with the filtered list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    scheduled_at:
+                      type: string
+                    status:
+                      type: string
+                    assignee_id:
+                      nullable: true
+                    tags:
+                      type: array
+                      items: {}
+                    kind:
+                      type: string
+                    id:
+                      type: integer
+                      nullable: true
+                    template_id:
+                      type: integer
+                      nullable: true
+                    date_key:
+                      type: string
+                      nullable: true
+                  required:
+                  - name
+                  - description
+                  - scheduled_at
+                  - status
+                  - assignee_id
+                  - tags
+                  - kind
+              example: []
+        '400':
+          description: responds with 400
+          content:
+            text/html:
+              schema:
+                type: string
+              example: ''

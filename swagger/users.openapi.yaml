@@ -1,0 +1,243 @@
+# Auto-generated from request specs by rspec-openapi.
+# Do not edit by hand — regenerate with: OPENAPI=1 bundle exec rspec spec/requests
+---
+openapi: 3.0.3
+info:
+  title: Task Tracker API
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:3000
+  description: Local
+paths:
+  "/users":
+    get:
+      summary: index
+      tags:
+      - Users
+      responses:
+        '200':
+          description: responds with the user list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    created_at:
+                      type: string
+                    name:
+                      type: string
+                    updated_at:
+                      type: string
+                  required:
+                  - id
+                  - created_at
+                  - name
+                  - updated_at
+              example:
+              - id: 679
+                created_at: '2026-06-11T18:54:09.032+03:00'
+                name: Rick Sanchez
+                updated_at: '2026-06-11T18:54:09.032+03:00'
+    post:
+      summary: create
+      tags:
+      - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              required:
+              - user
+            example:
+              user:
+                name: Rick Sanchez
+      responses:
+        '201':
+          description: creates the user and responds with 201
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  created_at:
+                    type: string
+                  name:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - created_at
+                - name
+                - updated_at
+              example:
+                id: 677
+                created_at: '2026-06-11T18:54:09.027+03:00'
+                name: Rick Sanchez
+                updated_at: '2026-06-11T18:54:09.027+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - name
+                required:
+                - errors
+              example:
+                errors:
+                  name:
+                  - must be filled
+  "/users/{id}":
+    delete:
+      summary: destroy
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 678
+      responses:
+        '204':
+          description: destroys the user and responds with 204
+    get:
+      summary: show
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 680
+      responses:
+        '200':
+          description: responds with the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  created_at:
+                    type: string
+                  name:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - created_at
+                - name
+                - updated_at
+              example:
+                id: 680
+                created_at: '2026-06-11T18:54:09.033+03:00'
+                name: Rick Sanchez
+                updated_at: '2026-06-11T18:54:09.033+03:00'
+    patch:
+      summary: update
+      tags:
+      - Users
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 682
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              required:
+              - user
+            example:
+              user:
+                name: Morty Smith
+      responses:
+        '200':
+          description: updates the user
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  id:
+                    type: integer
+                  created_at:
+                    type: string
+                  updated_at:
+                    type: string
+                required:
+                - name
+                - id
+                - created_at
+                - updated_at
+              example:
+                name: Morty Smith
+                id: 681
+                created_at: '2026-06-11T18:54:09.035+03:00'
+                updated_at: '2026-06-11T18:54:09.035+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - name
+                required:
+                - errors
+              example:
+                errors:
+                  name:
+                  - must be filled

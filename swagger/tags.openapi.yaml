@@ -1,0 +1,275 @@
+# Auto-generated from request specs by rspec-openapi.
+# Do not edit by hand — regenerate with: OPENAPI=1 bundle exec rspec spec/requests
+---
+openapi: 3.0.3
+info:
+  title: Task Tracker API
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:3000
+  description: Local
+paths:
+  "/tags":
+    get:
+      summary: index
+      tags:
+      - Tags
+      responses:
+        '200':
+          description: responds with the tag list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: integer
+                    created_at:
+                      type: string
+                    name:
+                      type: string
+                    system:
+                      type: boolean
+                    updated_at:
+                      type: string
+                  required:
+                  - id
+                  - created_at
+                  - name
+                  - system
+                  - updated_at
+              example:
+              - id: 218
+                created_at: '2026-06-11T18:54:08.924+03:00'
+                name: tag-3
+                system: false
+                updated_at: '2026-06-11T18:54:08.924+03:00'
+    post:
+      summary: create
+      tags:
+      - Tags
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              required:
+              - tag
+            example:
+              tag:
+                name: urgent
+      responses:
+        '201':
+          description: creates the tag and responds with 201
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  created_at:
+                    type: string
+                  name:
+                    type: string
+                  system:
+                    type: boolean
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - created_at
+                - name
+                - system
+                - updated_at
+              example:
+                id: 215
+                created_at: '2026-06-11T18:54:08.903+03:00'
+                name: urgent
+                system: false
+                updated_at: '2026-06-11T18:54:08.903+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - name
+                required:
+                - errors
+              example:
+                errors:
+                  name:
+                  - must be filled
+  "/tags/{id}":
+    delete:
+      summary: destroy
+      tags:
+      - Tags
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 217
+      responses:
+        '204':
+          description: destroys the tag and responds with 204
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: array
+                    items:
+                      type: string
+                required:
+                - errors
+              example:
+                errors:
+                - system tag cant be deleted
+    get:
+      summary: show
+      tags:
+      - Tags
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 219
+      responses:
+        '200':
+          description: responds with the tag
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  created_at:
+                    type: string
+                  name:
+                    type: string
+                  system:
+                    type: boolean
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - created_at
+                - name
+                - system
+                - updated_at
+              example:
+                id: 219
+                created_at: '2026-06-11T18:54:08.927+03:00'
+                name: tag-4
+                system: false
+                updated_at: '2026-06-11T18:54:08.927+03:00'
+    patch:
+      summary: update
+      tags:
+      - Tags
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 221
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                tag:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                  required:
+                  - name
+              required:
+              - tag
+            example:
+              tag:
+                name: renamed
+      responses:
+        '200':
+          description: updates the tag
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  name:
+                    type: string
+                  id:
+                    type: integer
+                  created_at:
+                    type: string
+                  system:
+                    type: boolean
+                  updated_at:
+                    type: string
+                required:
+                - name
+                - id
+                - created_at
+                - system
+                - updated_at
+              example:
+                name: renamed
+                id: 220
+                created_at: '2026-06-11T18:54:08.930+03:00'
+                system: false
+                updated_at: '2026-06-11T18:54:08.932+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      name:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - name
+                required:
+                - errors
+              example:
+                errors:
+                  name:
+                  - system tag cant be modified

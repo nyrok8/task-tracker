@@ -1,0 +1,26 @@
+services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 2s
+      timeout: 5s
+      retries: 15
+
+  web:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db/task_tracker_production
+      SECRET_KEY_BASE: 82b706195f62bbb8903aa3539c3105684039e36f90944a8359a9e9172337b4bbe75d73ec58b2bf2d8e9b02b47d3164a0ec6c2991979e5e563549a77977173969
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

@@ -1,0 +1,21 @@
+# frozen_string_literal: true
+
+require_relative 'boot'
+
+require 'rails/all'
+
+Bundler.require(*Rails.groups)
+
+module TaskTracker
+  class Application < Rails::Application
+    config.load_defaults 8.1
+
+    config.autoload_lib(ignore: %w[assets tasks])
+
+    config.api_only = true
+
+    config.time_zone = 'Europe/Moscow'
+
+    config.active_storage.variant_processor = :disabled
+  end
+end

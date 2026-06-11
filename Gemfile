@@ -2,15 +2,13 @@
 
 source 'https://rubygems.org'
 
-gem 'alba'
 gem 'bootsnap', require: false
 gem 'dry-validation', '~> 1.10'
+gem 'ice_cube'
 gem 'pg', '~> 1.1'
 gem 'puma', '>= 5.0'
 gem 'rails', '~> 8.1.3'
-gem 'solid_cable'
-gem 'solid_cache'
-gem 'solid_queue'
+gem 'ransack'
 gem 'tzinfo-data', platforms: %i[windows jruby]
 
 group :development, :test do

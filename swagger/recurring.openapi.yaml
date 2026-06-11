@@ -1,0 +1,325 @@
+# Auto-generated from request specs by rspec-openapi.
+# Do not edit by hand — regenerate with: OPENAPI=1 bundle exec rspec spec/requests
+---
+openapi: 3.0.3
+info:
+  title: Task Tracker API
+  version: 1.0.0
+servers:
+- url: http://127.0.0.1:3000
+  description: Local
+paths:
+  "/tasks/recurring/templates":
+    post:
+      summary: create
+      tags:
+      - Templates
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                template:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    description:
+                      type: string
+                    scheduled_at:
+                      type: string
+                  required:
+                  - name
+                  - description
+                  - scheduled_at
+                rule:
+                  type: object
+                  properties:
+                    recurrence_type:
+                      type: string
+                    starts_on:
+                      type: string
+                    day_interval:
+                      type: integer
+                  required:
+                  - recurrence_type
+                  - starts_on
+                  - day_interval
+              required:
+              - template
+              - rule
+            example:
+              template:
+                name: Daily rounds
+                description: Daily patient rounds
+                scheduled_at: '2026-06-01T10:00:00'
+              rule:
+                recurrence_type: daily
+                starts_on: '2026-06-01'
+                day_interval: 1
+      responses:
+        '201':
+          description: creates the template with its rule and responds with 201
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  assignee_id:
+                    nullable: true
+                  created_at:
+                    type: string
+                  description:
+                    type: string
+                  name:
+                    type: string
+                  scheduled_at:
+                    type: string
+                  status:
+                    type: string
+                  tags:
+                    type: array
+                    items: {}
+                  updated_at:
+                    type: string
+                required:
+                - id
+                - assignee_id
+                - created_at
+                - description
+                - name
+                - scheduled_at
+                - status
+                - tags
+                - updated_at
+              example:
+                id: 1046
+                assignee_id:
+                created_at: '2026-06-11T18:54:09.020+03:00'
+                description: Daily patient rounds
+                name: Daily rounds
+                scheduled_at: '2026-06-01T10:00:00.000+03:00'
+                status: pending
+                tags: []
+                updated_at: '2026-06-11T18:54:09.020+03:00'
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      starts_on:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - starts_on
+                required:
+                - errors
+              example:
+                errors:
+                  starts_on:
+                  - must be filled
+  "/tasks/recurring/templates/{template_id}/overrides/{id}":
+    delete:
+      summary: destroy
+      tags:
+      - Overrides
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '2026-06-09'
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 1041
+      responses:
+        '204':
+          description: tombstones the occurrence and responds with 204
+    get:
+      summary: show
+      tags:
+      - Overrides
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '2026-05-31'
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 1043
+      responses:
+        '200':
+          description: responds with the occurrence
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  template_id:
+                    type: integer
+                  date_key:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  scheduled_at:
+                    type: string
+                  status:
+                    type: string
+                  assignee_id:
+                    nullable: true
+                  tags:
+                    type: array
+                    items: {}
+                  id:
+                    nullable: true
+                required:
+                - template_id
+                - date_key
+                - name
+                - description
+                - scheduled_at
+                - status
+                - assignee_id
+                - tags
+                - id
+              example:
+                template_id: 1042
+                date_key: '2026-06-09'
+                name: Daily rounds
+                description: Daily patient rounds
+                scheduled_at: '2026-06-09T10:00:00.000+03:00'
+                status: pending
+                assignee_id:
+                tags: []
+                id:
+        '404':
+          description: responds with 404
+          content:
+            text/html:
+              schema:
+                type: string
+              example: ''
+    patch:
+      summary: update
+      tags:
+      - Overrides
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+        example: '2026-06-09'
+      - name: template_id
+        in: path
+        required: true
+        schema:
+          type: integer
+        example: 1045
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                override:
+                  type: object
+                  properties:
+                    status:
+                      type: string
+                  required:
+                  - status
+              required:
+              - override
+            example:
+              override:
+                status: done
+      responses:
+        '200':
+          description: overrides the occurrence and responds with it
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  template_id:
+                    type: integer
+                  date_key:
+                    type: string
+                  name:
+                    type: string
+                  description:
+                    type: string
+                  scheduled_at:
+                    type: string
+                  status:
+                    type: string
+                  assignee_id:
+                    nullable: true
+                  tags:
+                    type: array
+                    items: {}
+                  id:
+                    nullable: true
+                required:
+                - template_id
+                - date_key
+                - name
+                - description
+                - scheduled_at
+                - status
+                - assignee_id
+                - tags
+                - id
+              example:
+                template_id: 1044
+                date_key: '2026-06-09'
+                name: Daily rounds
+                description: Daily patient rounds
+                scheduled_at: '2026-06-09T10:00:00.000+03:00'
+                status: done
+                assignee_id:
+                tags: []
+                id:
+        '422':
+          description: responds with 422
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  errors:
+                    type: object
+                    properties:
+                      status:
+                        type: array
+                        items:
+                          type: string
+                    required:
+                    - status
+                required:
+                - errors
+              example:
+                errors:
+                  status:
+                  - 'must be one of: pending, done, cancelled'
